@@ -47,3 +47,8 @@ Para iniciar el proyecto en modo de desarrollo:
 
 ```bash
 npm run dev
+```
+
+Ingresar a la url
+```bash
+http://localhost:3000/login
