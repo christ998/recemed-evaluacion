@@ -1,50 +1,49 @@
-# React + TypeScript + Vite
+# Proyecto de Recetas con Vite y Vike de Christian Herrera
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto implementa una aplicación de recetas utilizando Vite como bundler y Vike para manejar el Server-Side Rendering (SSR) y Client-Side Rendering (CSR).
 
-Currently, two official plugins are available:
+## Estructura del Proyecto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+El proyecto consta de tres vistas principales:
 
-## Expanding the ESLint configuration
+1. Login (SSR)
+2. Password (SSR)
+3. Dashboard (CSR)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Implementación de SSR y CSR
 
-- Configure the top-level `parserOptions` property like this:
+### Server-Side Rendering (SSR)
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+SSR se implementó para las vistas de Login y Password utilizando Vike.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- Vista de Login (/pages/login):
+  - Renderiza el formulario de ingreso de RUT en el servidor.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- Vista de Password (/pages/password):
+  - Renderiza el formulario de contraseña en el servidor.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Client-Side Rendering (CSR)
+
+CSR se implementó específicamente para la vista de Dashboard.
+
+- Vista de Dashboard (/pages/dashboard):
+  - Configurada para renderizarse completamente en el cliente.
+  - En el archivo `+config.js` de esta vista, se estableció `ssr: false` para desactivar el renderizado en el servidor.
+  - Toda la lógica y renderizado de esta vista se maneja en el navegador del cliente.
+
+## Configuración de Vike
+
+- Para las vistas SSR (Login y Password), no se requiere configuración especial en `+config.js`.
+- Para la vista CSR (Dashboard), el archivo `+config.js` contiene:
+
+  ```javascript
+  export default {
+    ssr: false
+  }
+
+## Comandos para ejecutar el proyecto
+
+Para iniciar el proyecto en modo de desarrollo:
+
+```bash
+npm run dev
